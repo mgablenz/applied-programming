@@ -1,6 +1,8 @@
 import os
 import csv
 import pandas as pd
+import leafmap
+import webbrowser
 
 swiss_population_df = pd.read_csv(os.path.join('data', 'swiss-people-wikipedia-2.csv'))
 
@@ -40,4 +42,4 @@ death_miss.to_csv("death_misses.txt", sep="\t", index=False, encoding="utf-8")
 death_miss.deathPlaceLabel.value_counts().to_csv(
     "death_miss_names.txt", sep="\t", header=False, encoding="utf-8")
 
-print(len(death_miss), "rows,", death_miss.deathPlaceLabel.nunique(), "unique places")
+#print(len(death_miss), "rows,", death_miss.deathPlaceLabel.nunique(), "unique places")
