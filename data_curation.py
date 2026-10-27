@@ -1,6 +1,7 @@
 import os
 import csv
 import pandas as pd
+import openpyxl
 import leafmap
 import webbrowser
 
@@ -43,3 +44,5 @@ death_miss.deathPlaceLabel.value_counts().to_csv(
     "death_miss_names.txt", sep="\t", header=False, encoding="utf-8")
 
 #print(len(death_miss), "rows,", death_miss.deathPlaceLabel.nunique(), "unique places")
+df.to_excel("output.xlsx")
+print

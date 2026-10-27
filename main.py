@@ -1,11 +1,21 @@
 import leafmap
 import pandas as pd
 import os
-import data_curation
+from data_curation import df
+from geopy.distance import geodesic
+
+cols = ["birth_lat", "birth_lon", "death_lat", "death_lon"]
+df["distance_km"] = df.apply(
+    lambda r: geodesic((r["birth_lat"], r["birth_lon"]), (r["death_lat"], r["death_lon"])).km
+    if r[cols].notna().all() else float("nan"),
+    axis=1,
+)
+
+df.to_excel("with_distance.xlsx")
+print(df["distance_km"].mean())
 
 m = leafmap.Map(center=(47.0, 8.0), zoom=7)
 
-df = swiss_population_df
 
 births = df.dropna(subset=["birth_lat", "birth_lon"])
 deaths = df.dropna(subset=["death_lat", "death_lon"])
